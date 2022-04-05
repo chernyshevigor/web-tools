@@ -1,5 +1,10 @@
 <?php
 
+Knapsack::fractional();
+echo PHP_EOL;
+Knapsack::unbounded();
+exit;
+
 final class Knapsack
 {
     public static function fractional(): void
@@ -37,6 +42,34 @@ final class Knapsack
             return $a->valuePerUnitOfWeight() < $b->valuePerUnitOfWeight();
         });
         return $items;
+    }
+
+    public static function unbounded(): void
+    {
+        $vals = [14, 27, 44, 19];
+        $weight = [6, 7, 9, 8];
+        $w = 50;
+        echo self::unboundedAlg($w, $weight, $vals, count($vals));
+    }
+
+    /**
+     * @param int $w
+     * @param int[] $weight
+     * @param int[] $vals
+     * @param int $n
+     * @return float
+     */
+    public static function unboundedAlg(int $w, array $weight, array $vals, int $n): float
+    {
+        // maxratio will store the maximum value to weight
+        $maxRatio = PHP_INT_MIN;
+        for ($i = 0; $i < $n; $i++) {
+            if (($vals[$i] / $weight[$i]) > $maxRatio) {
+                $maxRatio = ($vals[$i] / $weight[$i]);
+            }
+        }
+        // the item with the maximum value to weight ratio will be put into the knapsack repeatedly until full
+        return $w * $maxRatio;
     }
 }
 
