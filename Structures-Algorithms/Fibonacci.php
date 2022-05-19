@@ -26,4 +26,57 @@ final class Fibonacci
     {
         return round(pow((sqrt(5) + 1) / 2, $n) / sqrt(5));
     }
+
+    public static function iterativeCase(int $x)
+    {
+        if ($x <= 1) {
+            return 0;
+        }
+        $first = 0;
+        $second = 1;
+        echo $first . PHP_EOL;
+        echo $second . PHP_EOL;
+        $x -= 2;
+        while ($x > 0) {
+            echo ($first + $second) . PHP_EOL;
+            $temp = $second;
+            $second = $first + $second;
+            $first = $temp;
+            --$x;
+        }
+    }
+
+    public static function iterativeCase2(int $x): array
+    {
+        if ($x <= 1) {
+            return [];
+        }
+        $first = 0;
+        $second = 1;
+        $out = [$first, $second];
+        $x -= 2;
+        while ($x > 0) {
+            $out[] = $first + $second;
+            $temp = $second;
+            $second = $first + $second;
+            $first = $temp;
+            --$x;
+        }
+        return $out;
+    }
+}
+
+function fibGen(int $n): Generator
+{
+    $cur = 1;
+    $prev = 0;
+    for ($i = 0; $i < $n; $i++) {
+        yield $cur;
+        $tmp = $cur;
+        $cur = $prev + $cur;
+        $prev = $tmp;
+    }
+}
+foreach (fibGen(9) as $fib) {
+    echo PHP_EOL . ' ' . $fib;
 }

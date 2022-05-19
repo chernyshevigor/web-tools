@@ -5,7 +5,11 @@ HeapSort::get($x);
 print_r($x);
 exit;
 
-// O(n Log(n))
+/*
+ * Worst O(n log(n))
+ * Average O(n log(n))
+ * Best O(n log(n))
+ */
 class HeapSort
 {
     /**
@@ -48,3 +52,10 @@ class HeapSort
 }
 
 // https://www.w3resource.com/php-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-2.php
+
+/*
+Пирамидальная сортировка — алгоритм сортировки, работающий в худшем, в среднем и в лучшем случае
+(то есть гарантированно) за O(n*log n) операций при сортировке n элементов.
+Количество применяемой служебной памяти не зависит от размера массива O(1).
+Может рассматриваться как усовершенствованная сортировка пузырьком, в которой элемент всплывает/тонет по многим путям.
+*/

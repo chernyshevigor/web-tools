@@ -5,11 +5,17 @@ CountingSort::get($x, min($x), max($x));
 print_r($x);
 exit;
 
-// O(n)
+/*
+ * Worst O(n+k)
+ * Average O(n+k)
+ * Best O(n+k)
+ */
 class CountingSort
 {
     /**
      * @param int[] $in
+     * @param int $min
+     * @param int $max
      * @return void
      */
     public static function get(array &$in, int $min, int $max): void

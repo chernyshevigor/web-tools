@@ -1,5 +1,25 @@
 <?php
 
+$x = [1,2,3,4,5,6,7,8,9,10];
+
+print_r(
+    BinarySearch::get($x, 6)
+);
+
+echo PHP_EOL;
+
+print_r(
+    BinarySearch::getRecursive($x, 6, min($x), max(($x)))
+);
+
+echo PHP_EOL;
+
+var_dump(
+    BinarySearch::getRecursive2($x, 6)
+);
+
+exit;
+
 final class BinarySearch
 {
     /**
@@ -44,5 +64,21 @@ final class BinarySearch
         } else {
             return self::getRecursive($sortedArray, $key, $middle + 1, $high);
         }
+    }
+
+    public static function getRecursive2(array $sortedArray, int $key): bool|int
+    {
+        if (count($sortedArray) === 0) {
+            return false;
+        }
+        $middle = count($sortedArray) / 2;
+        if ($key === $sortedArray[$middle]) {
+            return true;
+        } elseif ($key < $sortedArray[$middle]) {
+            return self::getRecursive(array_slice($sortedArray, 0, $middle + 1), $key);
+        } else {
+            return self::getRecursive(array_slice($sortedArray, $middle, count($sortedArray) - 1), $key);
+        }
+        return false;
     }
 }

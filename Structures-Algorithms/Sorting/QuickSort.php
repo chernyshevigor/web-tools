@@ -5,8 +5,11 @@ QuickSort::get($x, 0, count($x) - 1);
 print_r($x);
 exit;
 
-// middle case O(n log(n))
-// worst case O(n^2)
+/*
+ * Worst O(n^2)
+ * Average O(n log(n))
+ * Best O(n log(n))
+ */
 class QuickSort
 {
     /**
@@ -49,6 +52,37 @@ class QuickSort
     {
         [$in[$idx1], $in[$idx2]] = [$in[$idx2], $in[$idx1]];
     }
+
+    public static function quick(array $arr): array
+    {
+        if (count($arr) < 2) {
+            return $arr;
+        }
+        $pivot = (int) (count($arr) / 2);
+        $lessArr = [];
+        $moreArr = [];
+
+        for ($i = 0, $iMax = count($arr); $i < $iMax; $i++) {
+            if ($i === $pivot) {
+                continue;
+            }
+            if ($arr[$i] < $arr[$pivot]) {
+                $lessArr[] = $arr[$i];
+            } else {
+                $moreArr[] = $arr[$i];
+            }
+        }
+        return array_merge(self::quick($lessArr), [$arr[$pivot]], self::quick($moreArr));
+    }
 }
 
 // other PHP example: https://www.w3resource.com/php-exercises/searching-and-sorting-algorithm/searching-and-sorting-algorithm-exercise-1.php
+
+/*
+Выберем некоторый опорный элемент(пивот). После этого перекинем все элементы, меньшие его, налево, а большие – направо.
+Рекурсивно вызовемся от каждой из частей. В итоге получим отсортированный массив, так как каждый элемент меньше
+опорного стоял раньше каждого большего опорного. Асимптотика: O(n logn) в среднем и лучшем случае, O(n^2).
+Наихудшая оценка достигается при неудачном выборе опорного элемента.
+Идем одновременно слева и справа, находим пару элементов, таких, что левый элемент больше опорного,
+а правый меньше, и меняем их местами.
+*/
