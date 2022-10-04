@@ -66,6 +66,8 @@ final class Fibonacci
     }
 }
 
+// ---------------------------------- //
+
 function fibGen(int $n): Generator
 {
     $cur = 1;
@@ -79,4 +81,22 @@ function fibGen(int $n): Generator
 }
 foreach (fibGen(9) as $fib) {
     echo PHP_EOL . ' ' . $fib;
+}
+
+// ---------------------------------- //
+
+function fibClosure(): Closure
+{
+    $f2 = 0;
+    $f1 = 1;
+    return static function() use (&$f2, &$f1) {
+        $f = $f2;
+        $f2 = $f1;
+        $f1 = $f + $f1;
+        return $f;
+    };
+}
+$c = fibClosure();
+for ($i = 0; $i < 10; $i++) {
+    echo $c() . PHP_EOL;
 }
