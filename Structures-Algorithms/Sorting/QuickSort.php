@@ -29,7 +29,7 @@ class QuickSort
         }
     }
 
-    public static function partition(array &$in, int $left, int $right): int
+    private static function partition(array &$in, int $left, int $right): int
     {
         $pivot = $in[($left + $right) / 2]; // the center point
         while ($left <= $right) {
